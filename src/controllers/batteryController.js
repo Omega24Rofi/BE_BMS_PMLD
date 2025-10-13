@@ -39,17 +39,13 @@ class BatteryController {
         });
       }
 
-      // Define CSV fields
+      // Define CSV fields - Updated for actual MQTT data format
       const fields = [
         { label: "ID", value: "id" },
         { label: "Timestamp", value: "timestamp" },
         { label: "Date Time", value: "dateTime" },
-        // Add your battery data fields here
-        { label: "Voltage", value: "voltage" },
-        { label: "Current", value: "current" },
-        { label: "Temperature", value: "temperature" },
-        { label: "SOC", value: "soc" },
-        { label: "Status", value: "status" },
+        { label: "Voltage (V)", value: "voltage" },
+        { label: "Percentage (%)", value: "percentage" },
       ];
 
       const json2csvParser = new Parser({ fields });

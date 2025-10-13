@@ -28,16 +28,12 @@ client.on("connect", () => {
 
   // Send test data every 5 seconds
   setInterval(() => {
-    const statuses = ["charging", "discharging", "idle"];
-    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-
     // Generate random but realistic battery data
+    // Voltage range: 44V - 52V (typical for 48V battery system)
+    // Percentage: 0-100%
     const data = {
-      voltage: parseFloat((Math.random() * 2 + 11).toFixed(2)), // 11-13V
-      current: parseFloat((Math.random() * 5).toFixed(2)), // 0-5A
-      temperature: parseFloat((Math.random() * 10 + 20).toFixed(1)), // 20-30°C
-      soc: Math.floor(Math.random() * 100), // 0-100%
-      status: randomStatus,
+      voltage: parseFloat((Math.random() * 8 + 44).toFixed(2)), // 44-52V
+      percentage: Math.floor(Math.random() * 101), // 0-100%
     };
 
     client.publish(

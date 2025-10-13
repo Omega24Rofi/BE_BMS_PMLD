@@ -354,13 +354,26 @@ Firebase DB   WebSocket
 
 ## 📊 Expected MQTT Data Format
 
+Data yang dikirim dari IoT device melalui MQTT broker harus dalam format JSON berikut:
+
 ```json
 {
-  "voltage": 12.5,
-  "current": 2.3,
-  "temperature": 25.5,
-  "soc": 85,
-  "status": "charging"
+  "voltage": 48.5,
+  "percentage": 75
+}
+```
+
+**Field Description:**
+
+- `voltage` (Number): Tegangan battery dalam Volt (V)
+- `percentage` (Number): Persentase kapasitas battery (0-100%)
+
+**Example Data:**
+
+```json
+{
+  "voltage": 48.5,
+  "percentage": 75
 }
 ```
 

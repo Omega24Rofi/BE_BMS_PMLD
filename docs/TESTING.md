@@ -20,66 +20,48 @@ baterai/perintah
 
 ### Sample Payloads:
 
-#### Normal Charging
+#### Full Battery (100%)
 
 ```json
 {
-  "voltage": 12.5,
-  "current": 2.3,
-  "temperature": 25.5,
-  "soc": 85,
-  "status": "charging"
+  "voltage": 52.0,
+  "percentage": 100
 }
 ```
 
-#### Discharging
+#### High Battery (75%)
 
 ```json
 {
-  "voltage": 11.8,
-  "current": -1.5,
-  "temperature": 28.0,
-  "soc": 65,
-  "status": "discharging"
+  "voltage": 48.5,
+  "percentage": 75
 }
 ```
 
-#### Idle
+#### Medium Battery (50%)
 
 ```json
 {
-  "voltage": 12.6,
-  "current": 0.1,
-  "temperature": 24.0,
-  "soc": 100,
-  "status": "idle"
+  "voltage": 47.0,
+  "percentage": 50
 }
 ```
 
-#### High Temperature Warning
+#### Low Battery (25%)
 
 ```json
 {
-  "voltage": 12.2,
-  "current": 3.5,
-  "temperature": 45.0,
-  "soc": 70,
-  "status": "charging"
+  "voltage": 45.5,
+  "percentage": 25
 }
 ```
 
-#### Low Battery
+#### Critical Low Battery (10%)
 
-```json
+````json
 {
-  "voltage": 10.5,
-  "current": -2.0,
-  "temperature": 26.0,
-  "soc": 15,
-  "status": "discharging"
-}
-```
-
+  "voltage": 44.2,
+  "percentage": 10
 ## Using Node.js Script
 
 Create a test script to continuously send data:
@@ -101,20 +83,44 @@ client.on("connect", () => {
   // Send data every 5 seconds
   setInterval(() => {
     const data = {
-      voltage: (Math.random() * 2 + 11).toFixed(2),
-      current: (Math.random() * 5).toFixed(2),
-      temperature: (Math.random() * 10 + 20).toFixed(1),
-      soc: Math.floor(Math.random() * 100),
-      status: ["charging", "discharging", "idle"][
-        Math.floor(Math.random() * 3)
-      ],
+      voltage: parseFloat((Math.random() * 8 + 44).toFixed(2)), // 44-52V
+      percentage: Math.floor(Math.random() * 101), // 0-100%
     };
 
     client.publish("baterai/perintah", JSON.stringify(data));
     console.log("Published:", data);
   }, 5000);
 });
-```
+````
+
+const client = mqtt.connect(
+"mqtts://b2768521dac84b908c1d7eb68bf58c97.s1.eu.hivemq.cloud:8883",
+{
+username: "coba1",
+password: "IsaMaliki12",
+}
+);
+
+client.on("connect", () => {
+console.log("Connected to MQTT broker");
+
+// Send data every 5 seconds
+setInterval(() => {
+const data = {
+voltage: (Math.random() _ 2 + 11).toFixed(2),
+current: (Math.random() _ 5).toFixed(2),
+temperature: (Math.random() _ 10 + 20).toFixed(1),
+soc: Math.floor(Math.random() _ 100),
+status: ["charging", "discharging", "idle"][ Math.floor(Math.random() * 3) ],
+};
+
+    client.publish("baterai/perintah", JSON.stringify(data));
+    console.log("Published:", data);
+
+}, 5000);
+});
+
+````
 
 ## Using Python Script
 
@@ -138,14 +144,11 @@ client.connect(broker, port)
 
 while True:
     data = {
-        "voltage": round(random.uniform(11, 13), 2),
-        "current": round(random.uniform(0, 5), 2),
-        "temperature": round(random.uniform(20, 30), 1),
-        "soc": random.randint(0, 100),
-        "status": random.choice(["charging", "discharging", "idle"])
+        "voltage": round(random.uniform(44, 52), 2),
+        "percentage": random.randint(0, 100)
     }
 
     client.publish(topic, json.dumps(data))
     print(f"Published: {data}")
     time.sleep(5)
-```
+````
