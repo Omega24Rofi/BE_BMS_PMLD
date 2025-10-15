@@ -172,12 +172,10 @@ cd BE_BMSAPI documentation will be available at `/docs` when the server is runni
    ```env4. Submit a pull request
 
    PORT=3000
-
-   NODE_ENV=development## License
-
+   NODE_ENV=development
    FRONTEND_URL=http://localhost:5173
-
-   FIREBASE_DATABASE_URL=https://your-project.firebaseio.comThis project is licensed under the ISC License.
+   FIREBASE_DATABASE_URL=https://bms-pmld-default-rtdb.asia-southeast1.firebasedatabase.app
+   ```
 
    ````
 

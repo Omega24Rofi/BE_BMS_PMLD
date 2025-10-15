@@ -37,7 +37,7 @@ admin.initializeApp({
   credential: credential,
   databaseURL:
     process.env.FIREBASE_DATABASE_URL ||
-    "https://bms-pmld-default-rtdb.firebaseio.com",
+    "https://bms-pmld-default-rtdb.asia-southeast1.firebasedatabase.app",
 });
 
 const db = admin.database();
